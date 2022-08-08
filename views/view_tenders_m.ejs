@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- PAGE TITLE HERE -->
+    <title>tenders</title>
+
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <%- include('./header_m.ejs') %>
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="d-flex flex-wrap align-items-center mb-3">
+                    <div class="mb-3 me-auto">
+                        <div class="card-tabs style-1 mt-3 mt-sm-0">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link " href="javascript:void(0);" data-bs-toggle="tab"
+                                        id="transaction-tab" data-bs-target="#ActiveTenders-tab" role="tab">Active
+                                        Tenders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0);" data-bs-toggle="tab"
+                                        id="OpenedTenders-tab" data-bs-target="#OpenedTenders" role="tab">Opened
+                                        Tenders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="javascript:void(0);" data-bs-toggle="tab"
+                                        id="ClosedTenders-tab" data-bs-target="#ClosedTenders" role="tab">Closed
+                                        Tenders</a>
+                                </li>
+                                <li class="nav-item" id="">
+                                    <a class="nav-link" href="javascript:void(0);" data-bs-toggle="tab"
+                                        id="CanceledTenders-tab" data-bs-target="#CanceledTenders" role="tab">Canceled
+                                        Tenders</a>
+                                </li>
+                  
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="create_new_tender" class="btn btn-outline-primary mb-3">Create New Tenders</a>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 tab-content">
+
+
+                        <div class="tab-pane fade show active" id="ClosedTenders" role="tabpanel"
+                            aria-labelledby="ClosedTenders-tab">
+
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="closedTendersTable"
+                                        class="table primary-table-bordered table-responsive-sm">
+                                        <thead class="thead-primary">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tender name</th>
+                                                <th>Start date</th>
+                                                <th>End date</th>
+                                                <th>Requests</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+        <!--**********************************
+        Footer start
+    ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="javascript:void(0);" target="_blank"> Logo</a> 2022
+                </p>
+            </div>
+        </div>
+        <!--**********************************
+        Footer end
+    ***********************************-->
+        </div>
+        <!--**********************************
+    Main wrapper end
+***********************************-->
+
+        <!--**********************************
+    Scripts
+***********************************-->
+        <!-- Required vendors -->
+        <script src="vendor/global/global.min.js"></script>
+        <script src="js/custom.min.js"></script>
+        <script src="js/dlabnav-init.js"></script>
+        <script src="vendor/jquery/jquery.js"></script>
+
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css" />
+
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+        <script src="javascripts/view_tenders_m.js"></script>
+        <script src="javascripts/getWeb3Bundle.js"></script>
+
+</body>
+
+</html>

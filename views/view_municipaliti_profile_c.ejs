@@ -1,0 +1,151 @@
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- PAGE TITLE HERE -->
+    <title>Municipalities</title>
+
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body data-typography="cairo" data-theme-version="light" data-layout="vertical" data-nav-headerbg="color_1"
+    data-headerbg="color_1" data-sidebar-style="full" data-sibebarbg="color_1" data-sidebar-position="fixed"
+    data-header-position="fixed" data-container="wide" direction="ltr" data-primary="color_14">
+
+    <%- include('./header_c.ejs') %>
+        <script>
+            var mAddress = '<%- JSON.stringify(address) %>'; // test is now a valid js object
+            mAddress = mAddress.replace('"', '');
+            mAddress = mAddress.replace('"', '');
+        </script>
+
+        <div id="main-wrapper" class="show">
+
+            <div class="content-body" style="min-height: 960px;">
+                <!-- row -->
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header flex-wrap border-0 pb-0 align-items-end">
+
+                                    <div class="mb-3 me-3">
+                                        <h5 class="fs-30 text-black font-w500" id="municipalityName"></h5>
+                                        <span id="mAddress" class="text-num text-black fs-20 font-w500"></span>
+                                    </div>
+
+                                    <div class="dropdown mb-auto">
+                                        <a href="view_municipalities_c"
+                                            class="btn btn-rounded btn-md btn-primary me-3 me-3">
+                                            <i class="las la-angle-left scale5 me-2">Back</i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap align-items-center mb-3">
+                        <div class="mb-3 me-auto">
+                            <div class="card-tabs style-1 mt-3 mt-sm-0">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="javascript:void(0);" data-bs-toggle="tab"
+                                            id="transaction-tab" data-bs-target="#ActiveTenders-tab" role="tab">Active
+                                            Tenders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" data-bs-toggle="tab"
+                                            id="OpenedTenders-tab" data-bs-target="#OpenedTenders" role="tab">Opened
+                                            Tenders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="javascript:void(0);" data-bs-toggle="tab"
+                                            id="ClosedTenders-tab" data-bs-target="#ClosedTenders" role="tab">Closed
+                                            Tenders</a>
+                                    </li>
+                                    <li class="nav-item" id="">
+                                        <a class="nav-link" href="javascript:void(0);" data-bs-toggle="tab"
+                                            id="CanceledTenders-tab" data-bs-target="#CanceledTenders"
+                                            role="tab">Canceled
+                                            Tenders</a>
+                                    </li>
+                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 tab-content">
+
+
+                            <div class="tab-pane fade show active" id="ClosedTenders" role="tabpanel"
+                                aria-labelledby="ClosedTenders-tab">
+
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="closedTendersTable"
+                                            class="table primary-table-bordered table-responsive-sm">
+                                            <thead class="thead-primary">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Tender name</th>
+                                                    <th>Start date</th>
+                                                    <th>End date</th>
+                                                    <th>Requests</th>
+                                                    <th>Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="copyright">
+                    <p>Copyright © Designed &amp; Developed by <a href="javascript:void(0);" target="_blank">
+                            Logo</a>
+                        2022</p>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="vendor/global/global.min.js"></script>
+        <script src="js/custom.min.js"></script>
+        <script src="js/dlabnav-init.js"></script>
+        <script src="vendor/jquery/jquery.js"></script>
+
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css" />
+
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+        <script src="javascripts/view_municipaliti_profile_c.js"></script>
+        <script src="javascripts/getWeb3Bundle.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- PAGE TITLE HERE -->
+    <title>create tender</title>
+
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <%- include('./header_m.ejs') %>
+
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active"><a href="view_tenders_m">Tenders</a></li>
+                        <li class="breadcrumb-item"><strong>Create Tenders</strong></li>
+                    </ol>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="card">
+                            <!--<div class="card-header flex-wrap border-0 pb-0 ">
+                            <div>
+                                <h5 class="fs-20 text-black font-w500">Create Tenders</h5>
+                            </div>
+                            <div>
+                                <a href="tenders-2-tenders.html" class="btn btn-outline-primary mb-3">Back</a>
+                            </div>
+                        </div>-->
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label class="form-label">Tender name</label>
+                                                <input type="text" id="tender_name" class="form-control">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-4 mb-2">
+                                                        <label class="form-label">Tender deadline</label>
+                                                        <div class="mb-3">
+                                                            <input class="form-control" id="end_date" type="date">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="form-label"> <strong>Tender Text</strong></label>
+                                            <div class="col-sm-12">
+                                                <textarea class="form-control" id="tender_text" rows="4"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <h5 id="uploadState1">
+                                        </5>
+                                        <h4>Upload tender image </h4>
+                                        
+                                        <input type="file" id="imageFile" />
+                         
+                                             <div class="mb-3 row">
+                                                <div class="col-sm-12">
+                                                    <h4 class="text-primary text-center">Tender Requirements (Required
+                                                        Specifications)</h4>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Repeater Html Start -->
+                                            <div id="repeater">
+                                                <!-- Repeater Heading -->
+
+
+                                                <div class="repeater-heading">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-2">
+                                                            <a href="javascript:void(0);"
+                                                                class="btn btn-square btn-primary px-3 my-1 light me-2 repeater-add-btn">
+                                                                Add
+                                                            </a>
+                                                        </div>
+                                                        <div class="mb-3 col-md-2">
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <!-- Repeater Items -->
+                                                <div class="items" data-group="test">
+                                                    <!-- Repeater Content -->
+                                                    <div class="row ">
+                                                        <div class="col-md-3 col-xl-2">
+                                                            <div class="">
+                                                                <label
+                                                                    class="text-black font-w600 form-label">Name</label>
+                                                                <input type="text" name="name1" class="form-control">
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <label
+                                                                    class="text-black font-w600 form-label">Point</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-xl-2">
+                                                            <div>
+                                                                <label class="form-label">option 1</label>
+                                                                <input type="text" name="option1" class="form-control">
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <input type="number" name="p1" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-xl-2">
+                                                            <div>
+                                                                <label class="form-label">option 2</label>
+                                                                <input type="text" name="option2" class="form-control">
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <input type="number" name="p2" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-xl-2">
+                                                            <div>
+                                                                <label class="form-label">option 3</label>
+                                                                <input type="text" name="option3" class="form-control">
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <input type="number" name="p3" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-xl-2">
+                                                            <div>
+                                                                <label class="form-label">option 4</label>
+                                                                <input type="text" name="option4" class="form-control">
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <input type="number" name="p4" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class=" col-md-3 col-xl-2">
+                                                            <div>
+                                                                <label class="form-label">option 5</label>
+                                                                <input type="text" name="option4" class="form-control">
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <input type="number" name="p5" class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <button
+                                                        class="btn btn-square btn-danger mb-3 px-3 my-1 light me-2  remove-btn">
+                                                        Remove
+                                                    </button>
+                                                </div>
+
+
+                                            </div>
+                                            <!-- Repeater End -->
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex justify-content-center">
+                                                    <a class="submit btn btn-primary  px-5"
+                                                        id="create_tender_btn">Create Tender</a>
+                                                </div>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+        <!--**********************************
+        Footer start
+    ***********************************-->
+        <div class="footer">
+            <div class="coptionyright">
+                <p>Coptionyright © Designed &amp; Developtioned by <a href="javascript:void(0);" target="_blank">
+                        Logo</a> 2022</p>
+            </div>
+        </div>
+        <!--**********************************
+        Footer end
+    ***********************************-->
+        </div>
+        <!--**********************************
+    Main wrapper end
+***********************************-->
+
+        <!--**********************************
+    Scripts
+***********************************-->
+        <!-- Required vendors -->
+        <script src="vendor/global/global.min.js"></script>
+        <script src="js/custom.min.js"></script>
+        <script src="js/dlabnav-init.js"></script>
+
+        <script src="vendor/jquery-repeater/repeater.js" type="text/javascript"></script>
+        <script>
+            $("#repeater").createRepeater({
+                showFirstItemToDefault: true,
+            });
+        </script>
+        <script src="javascripts/create_tender.js"></script>
+        <script src="javascripts/getWeb3Bundle.js"></script>
+
+
+</body>
+
+</html>

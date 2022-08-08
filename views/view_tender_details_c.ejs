@@ -1,0 +1,92 @@
+<html lang="en" dir="ltr"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+     <title>view open tender</title>
+
+     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body data-typography="cairo" data-theme-version="light" data-layout="vertical" data-nav-headerbg="color_1" data-headerbg="color_1" data-sidebar-style="full" data-sibebarbg="color_1" data-sidebar-position="fixed" data-header-position="fixed" data-container="wide" direction="ltr" data-primary="color_14">
+    <%- include('./header_c.ejs') %>
+
+<div id="main-wrapper" class="show">
+    <script>
+        var tenderId = '<%- JSON.stringify(tender_id) %>'; // test is now a valid js object
+        tenderId = tenderId.replace('"', '');
+        tenderId = tenderId.replace('"', '');
+    </script>
+
+    <div class="content-body" style="min-height: 960px;">
+        <!-- row -->
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="view_municipalities_c">Municipalities</a></li>
+                    <li class="breadcrumb-item active" id="mName"><a href="view_municipaliti_profile_c?address=0x8AFE7Dc00760Ba902F339Cb57cB4acdB058f1155">Current Municipaliti</a></li>
+                    <li class="breadcrumb-item" id="tenderName"><strong>Tender Name</strong></li>
+                </ol>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="profile-about-me">
+                                <div class="border-bottom-1 pb-3">
+                                    <h4 class="text-warning">About Tenders</h4>
+                                    <div class="user-bx" style="margin: 0px">
+                                        <p class="mb-2" id="textTender">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-skills mb-3" id="rootElementM">
+                                <h4 class="text-warning mb-2">Basic Terms And Requirements</h4>
+                                
+                            </div>
+                            <div class="profile-skills mb-3" id="rootElementM">
+                                <h3 class="text-warning mb-2">Fee contract image</h3>
+                                
+                            </div>
+                            <img  class="center" id="myImage" alt="صورة عقد المناقصة" >
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <a href="create_request_tender_c" id="submet_tender" class="submit btn btn-primary  px-5">Submit a request for tender</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+        Content body end
+    ***********************************-->
+
+
+    <!--**********************************
+        Footer start
+    ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright © Designed &amp; Developed by <a href="javascript:void(0);" target="_blank"> Logo</a> 2022</p>
+        </div>
+    </div>
+ </div>
+ 
+<script src="vendor/global/global.min.js"></script>
+<script src="js/custom.min.js"></script>
+<script src="js/dlabnav-init.js"></script>
+<script src="javascripts/view_tender_details_c.js"></script>
+<script src="javascripts/getWeb3Bundle.js"></script>
+
+</body></html>

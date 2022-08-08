@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- PAGE TITLE HERE -->
+    <title>Details Tender</title>
+
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <%- include('./header_c.ejs') %>
+    <script>
+        var requestId = '<%- JSON.stringify(request_id) %>'; // test is now a valid js object
+        requestId = requestId.replace('"', '');
+        requestId = requestId.replace('"', '');
+    </script>
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+
+                <div class="row page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active"><a href="view_tenders_m">Tenders</a></li>
+                        <li class="breadcrumb-item active"><a>Tender Name</a></li>
+                        <li class="breadcrumb-item"><strong>Company Name</strong></li>
+                    </ol>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="profile-statistics">
+                                    <div class="text-center">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h3 class="m-b-0" id="companyName">Tech bic company</h3>
+                                                <span
+                                                    id="companyAddress">0x192c23b51e2ec8f7675a6ca27a0f1d9afbf787e5</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <h5 class="mb-0" id="companyPhone">0599967638</h5>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="profile-personal-info">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 col-5">
+                                            <h5 class="f-w-500">Price <span class="pull-end">:</span></h5>
+                                        </div>
+                                        <div class="col-sm-8 col-7" id="price"><span>20000$</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 col-5">
+                                            <h5 class="f-w-500" >Execution Time <span class="pull-end">:</span>
+                                            </h5>
+                                        </div>
+                                        <div class="col-sm-8 col-7"> <span id="startDate">2022/02/02</span> <span
+                                                class="pull-end"><strong> To </strong> </span><span id="endDate">2022/02/02</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4 col-5">
+                                            <h5 class="f-w-500">Total points <span class="pull-end">:</span></h5>
+                                        </div>
+                                        <div class="col-sm-8 col-7"><span class="badge badge-warning" id="points">50</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="profile-about-me">
+                                    <div class="row mb-4" id="rootElementM">
+ 
+                                    </div>
+
+                                    <div class="border-bottom-1 pb-4">
+                                        <div class="user-bx" style="margin: 0px">
+                                            <p class="mb-2" id="textTender">Lorem Ipsum is simply dummy text of the printing and
+                                                typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                                                text ever since the 1500s, when an unknown printer took a galley of type
+                                                and scrambled it to make a type specimen book. It has survived not only
+                                                five centuries, but also the leap into electronic typesetting, remaining
+                                                essentially unchanged. It was popularised in the 1960s with the release
+                                                of Letraset sheets containing Lorem Ipsum passages, and more recently
+                                                with desktop publishing software like Aldus PageMaker including versions
+                                                of Lorem Ipsum.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-skills mb-3" id="rootElementM">
+                                    <h3 class="text-warning mb-2">Tender contract image</h3>
+                                    
+                                </div>
+                                <img  id="myImage" class="center" alt="صورة وصل الشراء" >
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="copyright">
+                    <p>Copyright © Designed &amp; Developed by <a href="javascript:void(0);" target="_blank"> Logo</a>
+                        2022</p>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="vendor/global/global.min.js"></script>
+        <script src="js/custom.min.js"></script>
+        <script src="js/dlabnav-init.js"></script>
+        
+        <script src="javascripts/view_request_tender_c.js"></script>
+        <script src="javascripts/getWeb3Bundle.js"></script>
+
+</body>
+
+</html>

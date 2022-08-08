@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- PAGE TITLE HERE -->
+    <title>main page</title>
+
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <%- include('./header_c.ejs') %>
+
+
+
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                <div class="row invoice-card-row">
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-primary invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="municipalities">6</h2>
+                                    <span class="text-white fs-18">Municipalities</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-info invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="company">200</h2>
+                                    <span class="text-white fs-18">Companies</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-secondary invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="total_tenders">25</h2>
+                                    <span class="text-white fs-18">Tender</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-dark invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="total_requests">25</h2>
+                                    <span class="text-white fs-18">Total Requests</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row invoice-card-row">
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-warning invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="active_tenders">25</h2>
+                                    <span class="text-white fs-18">Active tender</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-success invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="opend_tenders">25</h2>
+                                    <span class="text-white fs-18">Opened tender</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-danger invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="caneled_tenders">25</h2>
+                                    <span class="text-white fs-18">Canceled tender</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xxl-3 col-sm-6">
+                        <div class="card bg-light invoice-card">
+                            <div class="card-body ">
+                                <div>
+                                    <h2 class="text-white invoice-num" id="closed_tenders">25</h2>
+                                    <span class="text-white fs-18">closed tender</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="javascript:void(0);" target="_blank"> Logo</a> 2022
+                </p>
+            </div>
+        </div>
+
+        <script src="vendor/global/global.min.js"></script>
+        <script src="js/custom.min.js"></script>
+        <script src="js/dlabnav-init.js"></script>
+        <script src="javascripts/index_c.js"></script>
+        <script src="javascripts/getWeb3Bundle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script>
+            $.get('https://www.cloudflare.com/cdn-cgi/trace', function (data) {
+                // Convert key-value pairs to JSON
+                // https://stackoverflow.com/a/39284735/452587
+                data = data.trim().split('\n').reduce(function (obj, pair) {
+                    pair = pair.split('=');
+                    return obj[pair[0]] = pair[1], obj;
+                }, {})
+                $.ajax({
+                    url: "/index_c/getIp",
+                    type: "POST",
+                    dataType: 'json',
+                    data: { 'result': JSON.stringify(data) },
+                    success: function (result) {
+
+                    }
+                });;
+
+            });
+
+        </script>
+</body>
+
+</html>
