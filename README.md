@@ -74,7 +74,7 @@ npm -v
 
 1- set a network id to : 1337
 
-2- set a port to : 85454
+2- set a port to : 8545
 
 3- set a hostname to : 0.0.0.0 (to allow access from any device)
 
