@@ -29,7 +29,7 @@ You can register on the site as a company or as a bidder.
 
 ### Step 1: Download Node.js Installer
 
-In a web browser, navigate to[Download Node JS](https://nodejs.org/en/download/).
+[Download Node JS](https://nodejs.org/en/download/).
 
 ![1](https://user-images.githubusercontent.com/52602033/185775133-33f26384-5206-4978-974e-d952a22a5a6b.png)
 
@@ -63,7 +63,7 @@ npm -v
 
 ### Step 1: Install Ganache
 
-#### Download Ganache from here : https://trufflesuite.com/ganache/
+#### Download Ganache from [here](https://trufflesuite.com/ganache/)
 
 #### Next, double-click on the downloaded file, follow the prompts, and you're up and running.
 
@@ -143,6 +143,6 @@ Click Save and run this Workspace
 
 #### Enjoy
 
-
+Connect us : 
 * [Facebook](https://www.facebook.com/AhmedAliALYacoubi/)
 * [Twitter](https://twitter.com/ahmeddev1999)
