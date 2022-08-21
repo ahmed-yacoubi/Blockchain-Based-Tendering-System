@@ -25,7 +25,7 @@ You can register on the site as a company or as a bidder.
 [Website demo](https://youtu.be/MV_h6u9PwdA)
 
 
-## How to install on your computer?
+# How to install on your computer?
 
 
 ## First step: install Node JS & NPM
