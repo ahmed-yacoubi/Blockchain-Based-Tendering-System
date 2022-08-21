@@ -29,7 +29,7 @@ You can register on the site as a company or as a bidder.
 
 ### Step 1: Download Node.js Installer
 
-In a web browser, navigate to https://nodejs.org/en/download/.
+In a web browser, navigate to[Download Node JS](https://nodejs.org/en/download/).
 
 ![1](https://user-images.githubusercontent.com/52602033/185775133-33f26384-5206-4978-974e-d952a22a5a6b.png)
 
@@ -86,7 +86,7 @@ Click Save and run this Workspace
 
 ## Third step: install Metamask Wallet
 
-#### Step 1 : install Metamask from this link : https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn or install by hand
+#### Step 1 : install Metamask from this link : [Download Metamask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn) or install by hand
 
 #### Step 2: Click the Add to Chrome button
 
@@ -144,3 +144,5 @@ Click Save and run this Workspace
 #### Enjoy
 
 
+* [Facebook](https://www.facebook.com/AhmedAliALYacoubi/)
+* [Twitter](https://twitter.com/ahmeddev1999)
