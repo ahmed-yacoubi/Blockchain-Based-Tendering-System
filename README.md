@@ -30,13 +30,13 @@ You can register on the site as a company or as a bidder.
 
 ## First step: install Node JS & NPM
 
-### Step 1: Download Node.js Installer
+#### Step 1: Download Node.js Installer
 
 [Download Node JS](https://nodejs.org/en/download/).
 
 ![1](https://user-images.githubusercontent.com/52602033/185775133-33f26384-5206-4978-974e-d952a22a5a6b.png)
 
-### Step 2: Install Node.js and NPM from Browser
+#### Step 2: Install Node.js and NPM from Browser
 
 1. Once the installer finishes downloading, launch it. Open the downloads link in your browser and click the file. Or, browse to the location where you have saved the file and double-click it to launch.
 
@@ -52,7 +52,7 @@ You can register on the site as a company or as a bidder.
 
 7. Finally, click the Install button to run the installer. When it finishes, click Finish.
 
-### Step 3: Verify Installation
+#### Step 3: Verify Installation
 
 Open a command prompt (or PowerShell), and enter the following:
 
@@ -64,13 +64,13 @@ npm -v
 
 ## Second step: download & setup Ganache
 
-### Step 1: Install Ganache
+#### Step 1: Install Ganache
 
 #### Download Ganache from [here](https://trufflesuite.com/ganache/)
 
 #### Next, double-click on the downloaded file, follow the prompts, and you're up and running.
 
-### Step 2: Create a Workspace
+#### Step 2: Create a Workspace
 
 1- set a network id to : 1337
 
@@ -99,9 +99,9 @@ Click Save and run this Workspace
 
 ![getstartedmetamask](https://user-images.githubusercontent.com/52602033/185775831-b5b2737f-924a-4123-81a1-0e98404fa59c.png)
 
-### Step 4: setup Metamsk 
+#### Step 4: setup Metamsk 
 
-#### 1- click Wallet Import
+##### 1- click Wallet Import
 
 
 
@@ -119,7 +119,7 @@ Click Save and run this Workspace
 
 ![evfce](https://user-images.githubusercontent.com/52602033/185775914-4f253279-51bc-4cfb-8b73-c26f549ce680.PNG)
 
-#### click add network
+##### click add network
 
 5- write this setup info and click save **
 
