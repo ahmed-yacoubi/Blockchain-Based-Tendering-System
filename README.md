@@ -10,7 +10,7 @@ You can register on the site as a company or as a bidder.
 1- A fully decentralized network, powered by PoW.
 2- Widespread
 3- High security and transparency
-# How to install on your computer?
+## How to install on your computer?
 
 ## First step: install Node JS & NPM
 ### Step 1: Download Node.js Installer
