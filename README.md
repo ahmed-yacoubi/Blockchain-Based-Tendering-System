@@ -10,14 +10,14 @@ You can register on the site as a company or as a bidder.
 1- A fully decentralized network, powered by PoW.
 2- Widespread
 3- High security and transparency
-# How to install on your computer?
+## How to install on your computer?
 
-# First step: install Node JS & NPM
-## Step 1: Download Node.js Installer
+## First step: install Node JS & NPM
+### Step 1: Download Node.js Installer
 In a web browser, navigate to https://nodejs.org/en/download/.
 ![1](https://user-images.githubusercontent.com/52602033/185775133-33f26384-5206-4978-974e-d952a22a5a6b.png)
 
-## Step 2: Install Node.js and NPM from Browser
+### Step 2: Install Node.js and NPM from Browser
 1. Once the installer finishes downloading, launch it. Open the downloads link in your browser and click the file. Or, browse to the location where you have saved the file and double-click it to launch.
 
 2. The system will ask if you want to run the software – click Run.
@@ -31,20 +31,20 @@ In a web browser, navigate to https://nodejs.org/en/download/.
 6. The wizard will let you select components to include or remove from the installation. Again, unless you have a specific need, accept the defaults by clicking Next.
 
 7. Finally, click the Install button to run the installer. When it finishes, click Finish.
-## Step 3: Verify Installation
+### Step 3: Verify Installation
 Open a command prompt (or PowerShell), and enter the following:
 
 node -v
 npm -v
 ![jb](https://user-images.githubusercontent.com/52602033/185775211-78e6029f-3fcb-45bb-b12f-bfd887d504cc.PNG)
 
-# Second step: download & setup Ganache
+## Second step: download & setup Ganache
 
-## Step 1: Install Ganache
+### Step 1: Install Ganache
 ** Download Ganache from here : https://trufflesuite.com/ganache/
 ** Next, double-click on the downloaded file, follow the prompts, and you're up and running.
 
-## Step 2: Create a Workspace
+### Step 2: Create a Workspace
 1- set a network id to : 1337
 2- set a port to : 85454
 3- set a hostname to : 0.0.0.0 (to allow access from any device)
@@ -55,14 +55,14 @@ npm -v
 
 Click Save and run this Workspace
 
-# Third step: install Metamask Wallet
-## Step 1 : install Metamask from this link : https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn or install by hand
-## Step 2: Click the Add to Chrome button
-## Step 3: Once installation is complete this page will be displayed. Click on the Get Started button.
+## Third step: install Metamask Wallet
+** Step 1 : install Metamask from this link : https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn or install by hand
+** Step 2: Click the Add to Chrome button
+** Step 3: Once installation is complete this page will be displayed. Click on the Get Started button.
 
 ![getstartedmetamask](https://user-images.githubusercontent.com/52602033/185775831-b5b2737f-924a-4123-81a1-0e98404fa59c.png)
 
-## Step 4: setup Metamsk 
+### Step 4: setup Metamsk 
 ** 1- click Wallet Import
 
 ![fefewwfe](https://user-images.githubusercontent.com/52602033/185775848-6200c476-68ab-4893-9bab-5eede7885660.PNG)
@@ -84,7 +84,7 @@ click add network
 
 ![fefe](https://user-images.githubusercontent.com/52602033/185775929-8080c2c9-4f67-43e9-bf0b-f63ad06e4117.PNG)
 
-#F inal Step: clone this project and run 
+## Final Step: clone this project and run 
 ** 1- donwload this project manually or via git : git clone https://github.com/ahmed-yacoubi/Blockchain-Based-Tendering-System-.git
 
 ![vfdsfv](https://user-images.githubusercontent.com/52602033/185776103-9f79d8af-a09c-40d8-9019-2a86ba985e9e.PNG)
