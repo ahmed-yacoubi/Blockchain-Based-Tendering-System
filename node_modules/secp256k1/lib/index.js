@@ -1,336 +1,245 @@
-const errors = {
-  IMPOSSIBLE_CASE: 'Impossible case. Please create issue.',
-  TWEAK_ADD:
-    'The tweak was out of range or the resulted private key is invalid',
-  TWEAK_MUL: 'The tweak was out of range or equal to zero',
-  CONTEXT_RANDOMIZE_UNKNOW: 'Unknow error on context randomization',
-  SECKEY_INVALID: 'Private Key is invalid',
-  PUBKEY_PARSE: 'Public Key could not be parsed',
-  PUBKEY_SERIALIZE: 'Public Key serialization error',
-  PUBKEY_COMBINE: 'The sum of the public keys is not valid',
-  SIG_PARSE: 'Signature could not be parsed',
-  SIGN: 'The nonce generation function failed, or the private key was invalid',
-  RECOVER: 'Public key could not be recover',
-  ECDH: 'Scalar was invalid (zero or overflow)'
+'use strict'
+var assert = require('./assert')
+var der = require('./der')
+var messages = require('./messages.json')
+
+function initCompressedValue (value, defaultValue) {
+  if (value === undefined) return defaultValue
+
+  assert.isBoolean(value, messages.COMPRESSED_TYPE_INVALID)
+  return value
 }
 
-function assert (cond, msg) {
-  if (!cond) throw new Error(msg)
-}
-
-function isUint8Array (name, value, length) {
-  assert(value instanceof Uint8Array, `Expected ${name} to be an Uint8Array`)
-
-  if (length !== undefined) {
-    if (Array.isArray(length)) {
-      const numbers = length.join(', ')
-      const msg = `Expected ${name} to be an Uint8Array with length [${numbers}]`
-      assert(length.includes(value.length), msg)
-    } else {
-      const msg = `Expected ${name} to be an Uint8Array with length ${length}`
-      assert(value.length === length, msg)
-    }
-  }
-}
-
-function isCompressed (value) {
-  assert(toTypeString(value) === 'Boolean', 'Expected compressed to be a Boolean')
-}
-
-function getAssertedOutput (output = (len) => new Uint8Array(len), length) {
-  if (typeof output === 'function') output = output(length)
-  isUint8Array('output', output, length)
-  return output
-}
-
-function toTypeString (value) {
-  return Object.prototype.toString.call(value).slice(8, -1)
-}
-
-module.exports = (secp256k1) => {
+module.exports = function (secp256k1) {
   return {
-    contextRandomize (seed) {
-      assert(
-        seed === null || seed instanceof Uint8Array,
-        'Expected seed to be an Uint8Array or null'
-      )
-      if (seed !== null) isUint8Array('seed', seed, 32)
-
-      switch (secp256k1.contextRandomize(seed)) {
-        case 1:
-          throw new Error(errors.CONTEXT_RANDOMIZE_UNKNOW)
-      }
+    privateKeyVerify: function (privateKey) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      return privateKey.length === 32 && secp256k1.privateKeyVerify(privateKey)
     },
 
-    privateKeyVerify (seckey) {
-      isUint8Array('private key', seckey, 32)
+    privateKeyExport: function (privateKey, compressed) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
 
-      return secp256k1.privateKeyVerify(seckey) === 0
+      compressed = initCompressedValue(compressed, true)
+      var publicKey = secp256k1.privateKeyExport(privateKey, compressed)
+
+      return der.privateKeyExport(privateKey, publicKey, compressed)
     },
 
-    privateKeyNegate (seckey) {
-      isUint8Array('private key', seckey, 32)
+    privateKeyImport: function (privateKey) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
 
-      switch (secp256k1.privateKeyNegate(seckey)) {
-        case 0:
-          return seckey
-        case 1:
-          throw new Error(errors.IMPOSSIBLE_CASE)
-      }
+      privateKey = der.privateKeyImport(privateKey)
+      if (privateKey && privateKey.length === 32 && secp256k1.privateKeyVerify(privateKey)) return privateKey
+
+      throw new Error(messages.EC_PRIVATE_KEY_IMPORT_DER_FAIL)
     },
 
-    privateKeyTweakAdd (seckey, tweak) {
-      isUint8Array('private key', seckey, 32)
-      isUint8Array('tweak', tweak, 32)
+    privateKeyNegate: function (privateKey) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
 
-      switch (secp256k1.privateKeyTweakAdd(seckey, tweak)) {
-        case 0:
-          return seckey
-        case 1:
-          throw new Error(errors.TWEAK_ADD)
-      }
+      return secp256k1.privateKeyNegate(privateKey)
     },
 
-    privateKeyTweakMul (seckey, tweak) {
-      isUint8Array('private key', seckey, 32)
-      isUint8Array('tweak', tweak, 32)
+    privateKeyModInverse: function (privateKey) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
 
-      switch (secp256k1.privateKeyTweakMul(seckey, tweak)) {
-        case 0:
-          return seckey
-        case 1:
-          throw new Error(errors.TWEAK_MUL)
-      }
+      return secp256k1.privateKeyModInverse(privateKey)
     },
 
-    publicKeyVerify (pubkey) {
-      isUint8Array('public key', pubkey, [33, 65])
+    privateKeyTweakAdd: function (privateKey, tweak) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
 
-      return secp256k1.publicKeyVerify(pubkey) === 0
+      assert.isBuffer(tweak, messages.TWEAK_TYPE_INVALID)
+      assert.isBufferLength(tweak, 32, messages.TWEAK_LENGTH_INVALID)
+
+      return secp256k1.privateKeyTweakAdd(privateKey, tweak)
     },
 
-    publicKeyCreate (seckey, compressed = true, output) {
-      isUint8Array('private key', seckey, 32)
-      isCompressed(compressed)
-      output = getAssertedOutput(output, compressed ? 33 : 65)
+    privateKeyTweakMul: function (privateKey, tweak) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
 
-      switch (secp256k1.publicKeyCreate(output, seckey)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.SECKEY_INVALID)
-        case 2:
-          throw new Error(errors.PUBKEY_SERIALIZE)
-      }
+      assert.isBuffer(tweak, messages.TWEAK_TYPE_INVALID)
+      assert.isBufferLength(tweak, 32, messages.TWEAK_LENGTH_INVALID)
+
+      return secp256k1.privateKeyTweakMul(privateKey, tweak)
     },
 
-    publicKeyConvert (pubkey, compressed = true, output) {
-      isUint8Array('public key', pubkey, [33, 65])
-      isCompressed(compressed)
-      output = getAssertedOutput(output, compressed ? 33 : 65)
+    publicKeyCreate: function (privateKey, compressed) {
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
 
-      switch (secp256k1.publicKeyConvert(output, pubkey)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.PUBKEY_PARSE)
-        case 2:
-          throw new Error(errors.PUBKEY_SERIALIZE)
-      }
+      compressed = initCompressedValue(compressed, true)
+
+      return secp256k1.publicKeyCreate(privateKey, compressed)
     },
 
-    publicKeyNegate (pubkey, compressed = true, output) {
-      isUint8Array('public key', pubkey, [33, 65])
-      isCompressed(compressed)
-      output = getAssertedOutput(output, compressed ? 33 : 65)
+    publicKeyConvert: function (publicKey, compressed) {
+      assert.isBuffer(publicKey, messages.EC_PUBLIC_KEY_TYPE_INVALID)
+      assert.isBufferLength2(publicKey, 33, 65, messages.EC_PUBLIC_KEY_LENGTH_INVALID)
 
-      switch (secp256k1.publicKeyNegate(output, pubkey)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.PUBKEY_PARSE)
-        case 2:
-          throw new Error(errors.IMPOSSIBLE_CASE)
-        case 3:
-          throw new Error(errors.PUBKEY_SERIALIZE)
-      }
+      compressed = initCompressedValue(compressed, true)
+
+      return secp256k1.publicKeyConvert(publicKey, compressed)
     },
 
-    publicKeyCombine (pubkeys, compressed = true, output) {
-      assert(Array.isArray(pubkeys), 'Expected public keys to be an Array')
-      assert(pubkeys.length > 0, 'Expected public keys array will have more than zero items')
-      for (const pubkey of pubkeys) {
-        isUint8Array('public key', pubkey, [33, 65])
-      }
-      isCompressed(compressed)
-      output = getAssertedOutput(output, compressed ? 33 : 65)
-
-      switch (secp256k1.publicKeyCombine(output, pubkeys)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.PUBKEY_PARSE)
-        case 2:
-          throw new Error(errors.PUBKEY_COMBINE)
-        case 3:
-          throw new Error(errors.PUBKEY_SERIALIZE)
-      }
+    publicKeyVerify: function (publicKey) {
+      assert.isBuffer(publicKey, messages.EC_PUBLIC_KEY_TYPE_INVALID)
+      return secp256k1.publicKeyVerify(publicKey)
     },
 
-    publicKeyTweakAdd (pubkey, tweak, compressed = true, output) {
-      isUint8Array('public key', pubkey, [33, 65])
-      isUint8Array('tweak', tweak, 32)
-      isCompressed(compressed)
-      output = getAssertedOutput(output, compressed ? 33 : 65)
+    publicKeyTweakAdd: function (publicKey, tweak, compressed) {
+      assert.isBuffer(publicKey, messages.EC_PUBLIC_KEY_TYPE_INVALID)
+      assert.isBufferLength2(publicKey, 33, 65, messages.EC_PUBLIC_KEY_LENGTH_INVALID)
 
-      switch (secp256k1.publicKeyTweakAdd(output, pubkey, tweak)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.PUBKEY_PARSE)
-        case 2:
-          throw new Error(errors.TWEAK_ADD)
-      }
+      assert.isBuffer(tweak, messages.TWEAK_TYPE_INVALID)
+      assert.isBufferLength(tweak, 32, messages.TWEAK_LENGTH_INVALID)
+
+      compressed = initCompressedValue(compressed, true)
+
+      return secp256k1.publicKeyTweakAdd(publicKey, tweak, compressed)
     },
 
-    publicKeyTweakMul (pubkey, tweak, compressed = true, output) {
-      isUint8Array('public key', pubkey, [33, 65])
-      isUint8Array('tweak', tweak, 32)
-      isCompressed(compressed)
-      output = getAssertedOutput(output, compressed ? 33 : 65)
+    publicKeyTweakMul: function (publicKey, tweak, compressed) {
+      assert.isBuffer(publicKey, messages.EC_PUBLIC_KEY_TYPE_INVALID)
+      assert.isBufferLength2(publicKey, 33, 65, messages.EC_PUBLIC_KEY_LENGTH_INVALID)
 
-      switch (secp256k1.publicKeyTweakMul(output, pubkey, tweak)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.PUBKEY_PARSE)
-        case 2:
-          throw new Error(errors.TWEAK_MUL)
-      }
+      assert.isBuffer(tweak, messages.TWEAK_TYPE_INVALID)
+      assert.isBufferLength(tweak, 32, messages.TWEAK_LENGTH_INVALID)
+
+      compressed = initCompressedValue(compressed, true)
+
+      return secp256k1.publicKeyTweakMul(publicKey, tweak, compressed)
     },
 
-    signatureNormalize (sig) {
-      isUint8Array('signature', sig, 64)
-
-      switch (secp256k1.signatureNormalize(sig)) {
-        case 0:
-          return sig
-        case 1:
-          throw new Error(errors.SIG_PARSE)
+    publicKeyCombine: function (publicKeys, compressed) {
+      assert.isArray(publicKeys, messages.EC_PUBLIC_KEYS_TYPE_INVALID)
+      assert.isLengthGTZero(publicKeys, messages.EC_PUBLIC_KEYS_LENGTH_INVALID)
+      for (var i = 0; i < publicKeys.length; ++i) {
+        assert.isBuffer(publicKeys[i], messages.EC_PUBLIC_KEY_TYPE_INVALID)
+        assert.isBufferLength2(publicKeys[i], 33, 65, messages.EC_PUBLIC_KEY_LENGTH_INVALID)
       }
+
+      compressed = initCompressedValue(compressed, true)
+
+      return secp256k1.publicKeyCombine(publicKeys, compressed)
     },
 
-    signatureExport (sig, output) {
-      isUint8Array('signature', sig, 64)
-      output = getAssertedOutput(output, 72)
+    signatureNormalize: function (signature) {
+      assert.isBuffer(signature, messages.ECDSA_SIGNATURE_TYPE_INVALID)
+      assert.isBufferLength(signature, 64, messages.ECDSA_SIGNATURE_LENGTH_INVALID)
 
-      const obj = { output, outputlen: 72 }
-      switch (secp256k1.signatureExport(obj, sig)) {
-        case 0:
-          return output.slice(0, obj.outputlen)
-        case 1:
-          throw new Error(errors.SIG_PARSE)
-        case 2:
-          throw new Error(errors.IMPOSSIBLE_CASE)
-      }
+      return secp256k1.signatureNormalize(signature)
     },
 
-    signatureImport (sig, output) {
-      isUint8Array('signature', sig)
-      output = getAssertedOutput(output, 64)
+    signatureExport: function (signature) {
+      assert.isBuffer(signature, messages.ECDSA_SIGNATURE_TYPE_INVALID)
+      assert.isBufferLength(signature, 64, messages.ECDSA_SIGNATURE_LENGTH_INVALID)
 
-      switch (secp256k1.signatureImport(output, sig)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.SIG_PARSE)
-        case 2:
-          throw new Error(errors.IMPOSSIBLE_CASE)
-      }
+      var sigObj = secp256k1.signatureExport(signature)
+      return der.signatureExport(sigObj)
     },
 
-    ecdsaSign (msg32, seckey, options = {}, output) {
-      isUint8Array('message', msg32, 32)
-      isUint8Array('private key', seckey, 32)
-      assert(toTypeString(options) === 'Object', 'Expected options to be an Object')
-      if (options.data !== undefined) isUint8Array('options.data', options.data)
-      if (options.noncefn !== undefined) assert(toTypeString(options.noncefn) === 'Function', 'Expected options.noncefn to be a Function')
-      output = getAssertedOutput(output, 64)
+    signatureImport: function (sig) {
+      assert.isBuffer(sig, messages.ECDSA_SIGNATURE_TYPE_INVALID)
+      assert.isLengthGTZero(sig, messages.ECDSA_SIGNATURE_LENGTH_INVALID)
 
-      const obj = { signature: output, recid: null }
-      switch (secp256k1.ecdsaSign(obj, msg32, seckey, options.data, options.noncefn)) {
-        case 0:
-          return obj
-        case 1:
-          throw new Error(errors.SIGN)
-        case 2:
-          throw new Error(errors.IMPOSSIBLE_CASE)
-      }
+      var sigObj = der.signatureImport(sig)
+      if (sigObj) return secp256k1.signatureImport(sigObj)
+
+      throw new Error(messages.ECDSA_SIGNATURE_PARSE_DER_FAIL)
     },
 
-    ecdsaVerify (sig, msg32, pubkey) {
-      isUint8Array('signature', sig, 64)
-      isUint8Array('message', msg32, 32)
-      isUint8Array('public key', pubkey, [33, 65])
+    signatureImportLax: function (sig) {
+      assert.isBuffer(sig, messages.ECDSA_SIGNATURE_TYPE_INVALID)
+      assert.isLengthGTZero(sig, messages.ECDSA_SIGNATURE_LENGTH_INVALID)
 
-      switch (secp256k1.ecdsaVerify(sig, msg32, pubkey)) {
-        case 0:
-          return true
-        case 3:
-          return false
-        case 1:
-          throw new Error(errors.SIG_PARSE)
-        case 2:
-          throw new Error(errors.PUBKEY_PARSE)
-      }
+      var sigObj = der.signatureImportLax(sig)
+      if (sigObj) return secp256k1.signatureImport(sigObj)
+
+      throw new Error(messages.ECDSA_SIGNATURE_PARSE_DER_FAIL)
     },
 
-    ecdsaRecover (sig, recid, msg32, compressed = true, output) {
-      isUint8Array('signature', sig, 64)
-      assert(
-        toTypeString(recid) === 'Number' &&
-          recid >= 0 &&
-          recid <= 3,
-        'Expected recovery id to be a Number within interval [0, 3]'
-      )
-      isUint8Array('message', msg32, 32)
-      isCompressed(compressed)
-      output = getAssertedOutput(output, compressed ? 33 : 65)
+    sign: function (message, privateKey, options) {
+      assert.isBuffer(message, messages.MSG32_TYPE_INVALID)
+      assert.isBufferLength(message, 32, messages.MSG32_LENGTH_INVALID)
 
-      switch (secp256k1.ecdsaRecover(output, sig, recid, msg32)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.SIG_PARSE)
-        case 2:
-          throw new Error(errors.RECOVER)
-        case 3:
-          throw new Error(errors.IMPOSSIBLE_CASE)
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
+
+      var data = null
+      var noncefn = null
+      if (options !== undefined) {
+        assert.isObject(options, messages.OPTIONS_TYPE_INVALID)
+
+        if (options.data !== undefined) {
+          assert.isBuffer(options.data, messages.OPTIONS_DATA_TYPE_INVALID)
+          assert.isBufferLength(options.data, 32, messages.OPTIONS_DATA_LENGTH_INVALID)
+          data = options.data
+        }
+
+        if (options.noncefn !== undefined) {
+          assert.isFunction(options.noncefn, messages.OPTIONS_NONCEFN_TYPE_INVALID)
+          noncefn = options.noncefn
+        }
       }
+
+      return secp256k1.sign(message, privateKey, noncefn, data)
     },
 
-    ecdh (pubkey, seckey, options = {}, output) {
-      isUint8Array('public key', pubkey, [33, 65])
-      isUint8Array('private key', seckey, 32)
-      assert(toTypeString(options) === 'Object', 'Expected options to be an Object')
-      if (options.data !== undefined) isUint8Array('options.data', options.data)
-      if (options.hashfn !== undefined) {
-        assert(toTypeString(options.hashfn) === 'Function', 'Expected options.hashfn to be a Function')
-        if (options.xbuf !== undefined) isUint8Array('options.xbuf', options.xbuf, 32)
-        if (options.ybuf !== undefined) isUint8Array('options.ybuf', options.ybuf, 32)
-        isUint8Array('output', output)
-      } else {
-        output = getAssertedOutput(output, 32)
-      }
+    verify: function (message, signature, publicKey) {
+      assert.isBuffer(message, messages.MSG32_TYPE_INVALID)
+      assert.isBufferLength(message, 32, messages.MSG32_LENGTH_INVALID)
 
-      switch (secp256k1.ecdh(output, pubkey, seckey, options.data, options.hashfn, options.xbuf, options.ybuf)) {
-        case 0:
-          return output
-        case 1:
-          throw new Error(errors.PUBKEY_PARSE)
-        case 2:
-          throw new Error(errors.ECDH)
-      }
+      assert.isBuffer(signature, messages.ECDSA_SIGNATURE_TYPE_INVALID)
+      assert.isBufferLength(signature, 64, messages.ECDSA_SIGNATURE_LENGTH_INVALID)
+
+      assert.isBuffer(publicKey, messages.EC_PUBLIC_KEY_TYPE_INVALID)
+      assert.isBufferLength2(publicKey, 33, 65, messages.EC_PUBLIC_KEY_LENGTH_INVALID)
+
+      return secp256k1.verify(message, signature, publicKey)
+    },
+
+    recover: function (message, signature, recovery, compressed) {
+      assert.isBuffer(message, messages.MSG32_TYPE_INVALID)
+      assert.isBufferLength(message, 32, messages.MSG32_LENGTH_INVALID)
+
+      assert.isBuffer(signature, messages.ECDSA_SIGNATURE_TYPE_INVALID)
+      assert.isBufferLength(signature, 64, messages.ECDSA_SIGNATURE_LENGTH_INVALID)
+
+      assert.isNumber(recovery, messages.RECOVERY_ID_TYPE_INVALID)
+      assert.isNumberInInterval(recovery, -1, 4, messages.RECOVERY_ID_VALUE_INVALID)
+
+      compressed = initCompressedValue(compressed, true)
+
+      return secp256k1.recover(message, signature, recovery, compressed)
+    },
+
+    ecdh: function (publicKey, privateKey) {
+      assert.isBuffer(publicKey, messages.EC_PUBLIC_KEY_TYPE_INVALID)
+      assert.isBufferLength2(publicKey, 33, 65, messages.EC_PUBLIC_KEY_LENGTH_INVALID)
+
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
+
+      return secp256k1.ecdh(publicKey, privateKey)
+    },
+
+    ecdhUnsafe: function (publicKey, privateKey, compressed) {
+      assert.isBuffer(publicKey, messages.EC_PUBLIC_KEY_TYPE_INVALID)
+      assert.isBufferLength2(publicKey, 33, 65, messages.EC_PUBLIC_KEY_LENGTH_INVALID)
+
+      assert.isBuffer(privateKey, messages.EC_PRIVATE_KEY_TYPE_INVALID)
+      assert.isBufferLength(privateKey, 32, messages.EC_PRIVATE_KEY_LENGTH_INVALID)
+
+      compressed = initCompressedValue(compressed, true)
+
+      return secp256k1.ecdhUnsafe(publicKey, privateKey, compressed)
     }
   }
 }

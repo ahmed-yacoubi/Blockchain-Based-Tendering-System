@@ -9,6 +9,14 @@ function callBack(result) {
                 if (type == 0) //m
                 {
 
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 0).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' municipality';
+                    });
+
                 } else if (type == 1)//c
                 {
                     window.location.href = "/index_c";

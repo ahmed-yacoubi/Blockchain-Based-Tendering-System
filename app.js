@@ -19,6 +19,9 @@ var viewTenderDetailsCRouter = require('./routes/view_tender_details_c');
 var viewRequestTenderCRouter = require('./routes/view_request_tender_c');
 var createRequestTenderCRouter = require('./routes/create_request_tender_c');
 var viewRequestTenderRouter = require('./routes/view_request_tender_m');
+var setting_m = require('./routes/setting_m');
+var setting_c = require('./routes/setting_c');
+
 
 var app = express();
 
@@ -46,6 +49,8 @@ app.use('/view_tender_details_c', viewTenderDetailsCRouter);
 app.use('/view_request_tender_c', viewRequestTenderCRouter);
 app.use('/create_request_tender_c', createRequestTenderCRouter);
 app.use('/view_request_tender_m', viewRequestTenderRouter);
+app.use('/setting_m', setting_m);
+app.use('/setting_c', setting_c);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -13,7 +13,14 @@ function callBack(result) {
 
                 } else if (type == 1)//c
                 {
-                    document.getElementById('signup').remove();
+
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 1).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' company';
+                    });
 
 
                 } else ///g
@@ -53,7 +60,7 @@ function main() {
             document.getElementById('price').textContent = request[2];
             let text = request[7];
             let hash = text.substring(0, 46);
-            document.getElementById('myImage').setAttribute('src', `https://infura-ipfs.io/ipfs/${hash}`);
+            document.getElementById('myImage').setAttribute('src', `https://ahmed-ali.infura-ipfs.io/ipfs/${hash}`);
             let tenderText = text.substring(46, text.length);
             document.getElementById('textTender').textContent = tenderText;
             document.getElementById('startDate').textContent = new Date(request[8] * 1000).toLocaleDateString();

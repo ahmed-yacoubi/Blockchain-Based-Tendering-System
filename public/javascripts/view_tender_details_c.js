@@ -14,11 +14,19 @@ function callBack(result) {
 
                 } else if (type == 1)//c
                 {
-                    document.getElementById('signup').remove();
+
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 1).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' company';
+                    });
 
 
-                } else ///g
-                {                    document.getElementById('tenders_c').remove();
+                } else ///gs
+                {
+                    document.getElementById('tenders_c').remove();
 
 
                 }
@@ -26,7 +34,7 @@ function callBack(result) {
 
             }); getTenderDeatils();
 
-    }else {
+    } else {
         window.location.href = "/signup";
 
     }
@@ -46,7 +54,7 @@ function getTenderDeatils() {
         .then(function (data, err) {
             let text = data[10];
             let hash = text.substring(0, 46);
-            document.getElementById('myImage').setAttribute('src', `https://infura-ipfs.io/ipfs/${hash}`);
+            document.getElementById('myImage').setAttribute('src', `https://ahmed-ali.infura-ipfs.io/ipfs/${hash}`);
             let tenderText = text.substring(46, text.length);
             document.getElementById('textTender').textContent = tenderText;
             let details = data[4];

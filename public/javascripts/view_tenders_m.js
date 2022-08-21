@@ -5,6 +5,14 @@ let datatable;
 
 function callBack(result) {
     if (result) {
+        let companyName = document.getElementById('signup');
+        companyName.href = "";
+        companyName.removeAttribute('href');
+        companyName.setAttribute('class', 'submit btn btn-primary btn-lg  px-5');
+        contract.methods.getProfile(accounts[0], 0).call({ from: accounts[0] }).then(function (data, err) {
+            const name = web3.utils.hexToUtf8(data[1]);
+            companyName.textContent = name + ' municipality';
+        });
         contract.methods.getUserType().call({ from: accounts[0] })
             .then(function (type, err) {
                 if (type == 0) //m
@@ -64,8 +72,6 @@ function callBack(result) {
                                     if (data != null && data[0] > 0) {
                                         let tenderData = {};
                                         const bindingId = data[0];
-                                        // alert(bindingId)
-
                                         const name = web3.utils.hexToUtf8(data[1]);
                                         const startDate = new Date(data[2] * 1000).toLocaleDateString();
                                         const endDate = new Date(data[3] * 1000).toLocaleDateString();
@@ -77,11 +83,16 @@ function callBack(result) {
                                         tenderData['action'] = 'View result'
                                         tenderData['class_name'] = 'badge badge-success'
                                         tenderData['href'] = `href= "view_tender_result_m?bindingId=${bindingId}"`
-
                                         counter++;
                                         contract.methods.getContractsRequest('0x0000000000000000000000000000000000000000', bindingId).call({ from: accounts[0] }).then(function (requestIds) {
 
-                                            tenderData['tenders_num'] = requestIds.length;
+                                            let count = 0;
+                                            requestIds.forEach(element => {
+                                                if (element[0] != null && element[0] != 0)
+                                                    count++;
+                                            });
+                                            tenderData['tenders_num'] = count;
+
                                             datatable.row.add(tenderData).draw();
 
                                         });
@@ -115,9 +126,14 @@ function callBack(result) {
                                             tenderData['class_name'] = 'badge badge-success'
                                             counter++;
                                             contract.methods.getContractsRequest('0x0000000000000000000000000000000000000000', bindingId).call({ from: accounts[0] }).then(function (requestIds) {
-
-                                                tenderData['tenders_num'] = requestIds.length;
-                                                datatable.row.add(tenderData).draw();
+                                                let count = 0;
+                                                requestIds.forEach(element => {
+                                                    if (element[0] != null && element[0] != 0)
+                                                        count++;
+                                                });
+                                                tenderData['tenders_num'] = count;
+                                                if (count > 0)
+                                                    datatable.row.add(tenderData).draw();
 
                                             });
                                         }
@@ -155,7 +171,12 @@ function callBack(result) {
 
                                             contract.methods.getContractsRequest('0x0000000000000000000000000000000000000000', bindingId).call({ from: accounts[0] }).then(function (requestIds) {
 
-                                                tenderData['tenders_num'] = requestIds.length;
+                                                let count = 0;
+                                                requestIds.forEach(element => {
+                                                    if (element[0] != null && element[0] != 0)
+                                                        count++;
+                                                });
+                                                tenderData['tenders_num'] = count;
                                                 datatable.row.add(tenderData).draw();
 
                                             });

@@ -32,8 +32,8 @@ $('#signup').on('click', function () {
     if (phoneNo.length > 0 && name.length > 0) {
         if (type === 'company') {
             signUp(name, phoneNo, 1, success => {
-                
-                window.location.replace("/index_c");
+                if (success)
+                    window.location.replace("/index_c");
 
             });
         } else if (type === 'municipality') {

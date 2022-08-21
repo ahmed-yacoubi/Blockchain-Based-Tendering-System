@@ -15,7 +15,13 @@ function callBack(result) {
                 } else if (type == 1)//c
                 {
                     getTenderDeatils();
-                    document.getElementById('signup').remove();
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 1).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' company';
+                    });
 
                 } else ///g
                 {
@@ -91,7 +97,11 @@ async function createRequest(companyId, price, bindingId, details, text, startDa
             try {
                 await contract.methods.requestToBinding(
                     companyId, price, bindingId, details, text, startDate, endDate
-                ).send({ from: accounts[0] });
+                ).send({ from: accounts[0] }).then(function name(params) {
+                    window.location.href = "view_my_tenders_c";
+
+                });
+
             } catch (err) {
                 alert(err)
                 handelError(err.message)

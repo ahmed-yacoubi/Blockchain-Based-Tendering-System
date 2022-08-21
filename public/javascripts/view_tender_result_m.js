@@ -9,6 +9,14 @@ function callBack(result) {
                 if (type == 0) //m
                 {
 
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 0).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' municipality';
+                    });
+
                     getTenderResult();
 
                 } else if (type == 1)//c
@@ -24,7 +32,7 @@ function callBack(result) {
 
 
             });
-    }else {
+    } else {
         window.location.href = "/signup";
 
     }
@@ -66,7 +74,7 @@ $(document).ready(function () {
 });
 
 function getTenderResult() {
-     contract.methods.getBindingById(tenderId).call({ from: accounts[0] })
+    contract.methods.getBindingById(tenderId).call({ from: accounts[0] })
         .then(function (dataM, err) {
             let detailsM = dataM[4];
             let pointsM = dataM[5];
@@ -75,15 +83,15 @@ function getTenderResult() {
                 .then(function (requests, err) {
                     requests.forEach((data) => {
                         let requestData = {};
-                        let requestId=data[0];
-                        if(requestId>0){
+                        let requestId = data[0];
+                        if (requestId > 0) {
                             let companyName;
                             let price = data[2];
                             let startDate = data[8];
                             let endDate = data[9];
                             let points = getTenderPoints(detailsM, pointsM, data[4]);
                             let isWinner = data[6];
-     
+
                             contract.methods.getProfile(data[5], 1).call({ from: accounts[0] })
                                 .then(function (bindings, err) {
                                     companyName = web3.utils.hexToUtf8(bindings[1]);
@@ -100,15 +108,15 @@ function getTenderResult() {
                                     else {
                                         requestData['isWinner'] = 'No';
                                         requestData['className'] = ` class="badge badge-danger" `;
-                                        
+
                                     }
                                     requestData['num'] = counter;
                                     datatable.row.add(requestData).draw();
                                     counter++;
-    
+
                                 });
                         }
-       
+
                     });
                 });
         });
@@ -121,8 +129,8 @@ function getTenderPoints(details, points, companyDetails) {
         for (let i = 0; i < details.length; i++) {
             if (web3.utils.hexToUtf8(companyDetails[j])
                 == web3.utils.hexToUtf8(details[i])) {
-                    pointContuer += parseFloat(points[i]);
-                }
+                pointContuer += parseFloat(points[i]);
+            }
         }
     }
     return pointContuer;

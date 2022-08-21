@@ -14,7 +14,14 @@ function callBack(result) {
 
                 } else if (type == 1)//c
                 {
-                    document.getElementById('signup').remove();
+
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 1).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' company';
+                    });
 
 
 
@@ -27,7 +34,7 @@ function callBack(result) {
 
             }); getTenderResult();
 
-    }else {
+    } else {
         window.location.href = "/signup";
 
     }
@@ -81,14 +88,14 @@ function getTenderResult() {
                     requests.forEach((data) => {
                         let requestData = {};
                         let requestId = data[0];
-                        if  (requestId>0){
+                        if (requestId > 0) {
                             let companyName;
                             let price = data[2];
                             let startDate = data[8];
                             let endDate = data[9];
                             let points = getTenderPoints(detailsM, pointsM, data[4]);
                             let isWinner = data[6];
-    
+
                             contract.methods.getProfile(data[5], 1).call({ from: accounts[0] })
                                 .then(function (bindings, err) {
                                     companyName = web3.utils.hexToUtf8(bindings[1]);
@@ -105,16 +112,16 @@ function getTenderResult() {
                                     else {
                                         requestData['isWinner'] = 'No';
                                         requestData['className'] = ` class="badge badge-danger" `;
-    
+
                                     }
                                     requestData['num'] = counter;
                                     datatable.row.add(requestData).draw();
-    
+
                                     counter++;
-    
+
                                 });
                         }
-              
+
                     });
                 });
         });

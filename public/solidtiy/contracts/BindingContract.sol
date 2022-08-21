@@ -17,17 +17,17 @@ contract BindingContract {
     }
 
     struct BindingData {
-        uint64 bindingId;
-        bytes32 name;
-        uint64 startDate;
-        uint64 endDate;
-        bytes16[] details;
-        uint8[] points;
-        address municipalityAddress;
-        bool isCanceled;
-        bool isOpened;
-        uint64 _winnerId;
-        string tenderText;
+        uint64 bindingId;//0
+        bytes32 name;//1
+        uint64 startDate;//2
+        uint64 endDate;//3
+        bytes16[] details;//4
+        uint8[] points;//5
+        address municipalityAddress;//6
+        bool isCanceled;//7
+        bool isOpened;//8
+        uint64 _winnerId;//9
+        string tenderText;//10
     }
 
     struct RequestBinding {

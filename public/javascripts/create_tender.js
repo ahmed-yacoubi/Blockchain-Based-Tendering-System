@@ -1,4 +1,3 @@
-
 let web3;
 let accounts;
 let contract;
@@ -17,6 +16,13 @@ function callBack(result) {
                 if (type == 0) //m
                 {
 
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 0).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' municipality';
+                    });
 
                 } else if (type == 1)//c
                 {
@@ -119,6 +125,7 @@ $('#create_tender_btn').on('click', async function () {
                     details,
                     points, hashImage + tenderText
                 ).send({ from: accounts[0] }).then((result) => {
+                    window.location.href = "view_tenders_m";
 
                 });
             } catch (err) {

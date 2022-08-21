@@ -14,11 +14,19 @@ function callBack(result) {
 
                 } else if (type == 1)//c
                 {
-                    document.getElementById('signup').remove();
+
+                    let companyName = document.getElementById('signup');
+                    companyName.href = "";
+                    companyName.removeAttribute('href');
+                    contract.methods.getProfile(accounts[0], 1).call({ from: accounts[0] }).then(function (data, err) {
+                        const name = web3.utils.hexToUtf8(data[1]);
+                        companyName.textContent = name + ' company';
+                    });
 
 
                 } else ///g
-                {                    document.getElementById('tenders_c').remove();
+                {
+                    document.getElementById('tenders_c').remove();
 
 
                 }
@@ -26,7 +34,7 @@ function callBack(result) {
 
             }); getCompanyRequest();
 
-    }else {
+    } else {
         window.location.href = "/signup";
 
     }
