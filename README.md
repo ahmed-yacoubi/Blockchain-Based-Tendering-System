@@ -1,7 +1,7 @@
 # Tendering System Based on Blockchain
 It is a website based on the Ethereum blockchain, designed to create and manage tenders.
 You can register on the site as a company or as a bidder.
-** Features of this site: **
+**Features of this site:**
 1- Eliminate counterfeiting and fraud
 2- High security system, because of the blockchain
 3- Permanent archiving (in Ethereum)
@@ -58,7 +58,7 @@ Click Save and run this Workspace
 ## Third step: install Metamask Wallet
 ** Step 1 : install Metamask from this link : https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn or install by hand **
 ** Step 2: Click the Add to Chrome button **
-** Step 3: Once installation is complete this page will be displayed. Click on the Get Started button. **
+**Step 3: Once installation is complete this page will be displayed. Click on the Get Started button.**
 
 ![getstartedmetamask](https://user-images.githubusercontent.com/52602033/185775831-b5b2737f-924a-4123-81a1-0e98404fa59c.png)
 
