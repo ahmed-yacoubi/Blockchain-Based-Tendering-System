@@ -4,23 +4,23 @@ It is a website based on the Ethereum blockchain, designed to create and manage 
 
 You can register on the site as a company or as a bidder.
 
-**Features of this site:**
+#### Features of this site:
 
-1- Eliminate counterfeiting and fraud
+* Eliminate counterfeiting and fraud
 
-2- High security system, because of the blockchain
+* High security system, because of the blockchain
 
-3- Permanent archiving (in Ethereum)
+* Permanent archiving (in Ethereum)
 
-4- The possibility of determining the winner of the tender easily
+* The possibility of determining the winner of the tender easily
 
-** Why Ethereum? **
+#### Why Ethereum?
 
-1- A fully decentralized network, powered by PoW.
+* A fully decentralized network, powered by PoW.
 
-2- Widespread
+* Widespread
 
-3- High security and transparency
+* High security and transparency
 
 ## How to install on your computer?
 
@@ -63,9 +63,9 @@ npm -v
 
 ### Step 1: Install Ganache
 
-** Download Ganache from here : https://trufflesuite.com/ganache/  **
+#### Download Ganache from here : https://trufflesuite.com/ganache/
 
-** Next, double-click on the downloaded file, follow the prompts, and you're up and running. **
+#### Next, double-click on the downloaded file, follow the prompts, and you're up and running.
 
 ### Step 2: Create a Workspace
 
@@ -86,11 +86,11 @@ Click Save and run this Workspace
 
 ## Third step: install Metamask Wallet
 
-** Step 1 : install Metamask from this link : https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn or install by hand **
+#### Step 1 : install Metamask from this link : https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn or install by hand
 
-** Step 2: Click the Add to Chrome button **
+#### Step 2: Click the Add to Chrome button
 
-**Step 3: Once installation is complete this page will be displayed. Click on the Get Started button.**
+#### Step 3: Once installation is complete this page will be displayed. Click on the Get Started button.
 
 
 
@@ -98,49 +98,49 @@ Click Save and run this Workspace
 
 ### Step 4: setup Metamsk 
 
-** 1- click Wallet Import **
+#### 1- click Wallet Import
 
 
 
 ![fefewwfe](https://user-images.githubusercontent.com/52602033/185775848-6200c476-68ab-4893-9bab-5eede7885660.PNG)
 
-** 2- open Ganache Workspace and copy this phase **
+2- open Ganache Workspace and copy this phase
 
 ![rr](https://user-images.githubusercontent.com/52602033/185775867-8621cbd1-e935-4099-a3ba-19be539da500.PNG)
 
-** 3-paste copied phase in these boxes and click import **
+3-paste copied phase in these boxes and click import
 
 ![grfdgfv](https://user-images.githubusercontent.com/52602033/185775876-d59b37de-243f-4935-9d30-70a2a4f5ed44.PNG)
 
-** 4-Now we went add & connect ganache newtork to metamask **
+4-Now we went add & connect ganache newtork to metamask
 
 ![evfce](https://user-images.githubusercontent.com/52602033/185775914-4f253279-51bc-4cfb-8b73-c26f549ce680.PNG)
 
-click add network
+#### click add network
 
-** 2- write this setup info and click save **
+5- write this setup info and click save **
 
 ![fefe](https://user-images.githubusercontent.com/52602033/185775929-8080c2c9-4f67-43e9-bf0b-f63ad06e4117.PNG)
 
 ## Final Step: clone this project and run 
 
-** 1- donwload this project manually or via git : git clone https://github.com/ahmed-yacoubi/Blockchain-Based-Tendering-System-.git **
+1- donwload this project manually or via git : git clone https://github.com/ahmed-yacoubi/Blockchain-Based-Tendering-System-.git
 
 ![vfdsfv](https://user-images.githubusercontent.com/52602033/185776103-9f79d8af-a09c-40d8-9019-2a86ba985e9e.PNG)
 
-** 2- open new global cmd and install truffle via this command :  npm install -g truffle **
+2- open new global cmd and install truffle via this command :  npm install -g truffle 
 
-** 3- open this project in cmd or git Bash and install all library **
+3- open this project in cmd or git Bash and install all library 
 
 ![dwdww](https://user-images.githubusercontent.com/52602033/185776127-fc58d8f1-0475-46f9-bfda-6e46c09b2f8c.PNG)
 
-** 4- write this command in cmd : truffle migrate --compile-all --reset  --network development **
+4- write this command in cmd : truffle migrate --compile-all --reset  --network development 
 
-** 5- finally run project via this command : npm start **
+5- finally run project via this command : npm start 
 
 ![fecefc](https://user-images.githubusercontent.com/52602033/185776280-b1bdf8b3-a4ca-45d5-89d0-ded205ecec8f.png)
 
 
-** Enjoy **
+#### Enjoy
 
 
