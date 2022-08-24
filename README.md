@@ -22,7 +22,6 @@ You can register on the site as a company or as a bidder.
 * High security and transparency
 
 
-[Website demo(video)](https://youtu.be/MV_h6u9PwdA)
 
 
 # How to install on your computer?
